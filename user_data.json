@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Nyanko",
+    "age": 6,
+    "hobby": "look at Kuma"
+  },
+  {
+    "name": "Kuma",
+    "age": 6,
+    "hobby": "sleeping"
+  },
+  {
+    "name": "Usagi",
+    "age": 3
+  },
+  {
+    "name": "Buta",
+    "age": 5,
+    "hobby": "eating"
+  },
+  {
+    "name": "Hiyoko",
+    "age": 1,
+    "hobby": "hidden"
+  }
+]
+
