@@ -22,6 +22,7 @@ class RecombinedData
         hash.each.each.with_index(1) do |(k, v), i|
           @ws[num, i] = v.to_s
         end
+        puts "#{num - 1}/#{users_data.size}"
       end
     end
 
