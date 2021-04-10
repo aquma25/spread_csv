@@ -21,7 +21,7 @@ gem install google_drive
 ### 実行コマンド
 ```
 ruby spread_csv.rb スプレッドシートのURL スプレッドシートのタブ名
-// ex: spread_csv.rb https://docs.google.com/spreadsheets~~~~~~=0 sheet1
+// ex: ruby spread_csv.rb https://docs.google.com/spreadsheets~~~~~~=0 sheet1
 ```
 
 ### コマンド実行後
