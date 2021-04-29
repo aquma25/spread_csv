@@ -1,20 +1,27 @@
-  # Google Spreadsheetに処理を書き込んでいく
+#Google Spreadsheetに処理を書き込んでいくスクリプト
 
-  require "google_drive"
-  require_relative "recombined_data"
+require "google_drive"
+require_relative "recombined_data"
+require_relative "mysql_access"
 
-  puts "Process Start"
+puts "Process Start"
 
-  session = GoogleDrive::Session.from_config("config.json")
+session = GoogleDrive::Session.from_config("config.json")
 
-  spread_sheet_path = ARGV[0]
-  sheet_tab_name = ARGV[1]
+SPREAD_SHEET_PATH = ARGV[0]
+SHEET_TAB_NAME    = ARGV[1]
+SQL_ENV           = ARGV[2]
+QUERY             = ARGV[3]
 
-  sp = session.spreadsheet_by_url(spread_sheet_path.to_s)
-  ws = sp.worksheet_by_title(sheet_tab_name.to_s)
+spread_sheet = session.spreadsheet_by_url(SPREAD_SHEET_PATH)
+work_sheet   = spread_sheet.worksheet_by_title(SHEET_TAB_NAME)
 
-  ws = RecombinedData.new(ws).run
+wws = if SQL_ENV.nil?
+        RecombinedData.new(work_sheet).run
+      else
+        MysqlAccess.new(work_sheet, SQL_ENV, QUERY).run
+      end
 
-  ws.save
+wws.save
 
-  puts "Process Finish"
+puts "Process Finish"
