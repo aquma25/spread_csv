@@ -4,29 +4,29 @@ require "json"
 
 class RecombinedData
 
-  def initialize(ws)
-    @ws = ws
+  def initialize(work_sheet)
+    @work_sheet = work_sheet
   end
 
   def run
     File.open("user_data.json") do |file|
       users_data = JSON.load(file)
 
-      # Column部分
-      users_data[0].each.with_index(1) do |(k, v), i|
-        @ws[1, i] = k.to_s
+      # Header
+      users_data[0].each.with_index(1) do |(key, val), i|
+        @work_sheet[1, i] = key.to_s
       end
 
-      # Record部分
+      # Rows
       users_data.each.with_index(2) do |hash, num|
-        hash.each.each.with_index(1) do |(k, v), i|
-          @ws[num, i] = v.to_s
+        hash.each.each.with_index(1) do |(key, val), i|
+          @work_sheet[num, i] = val.to_s
         end
         puts "#{num - 1}/#{users_data.size}"
       end
     end
 
-    @ws
+    @work_sheet
   end
 
 end

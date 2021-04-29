@@ -2,12 +2,14 @@
   {
     "name": "Nyanko",
     "age": 6,
-    "hobby": "look at Kuma"
+    "hobby": "look at Kuma",
+    "image": "https://www.tagindex.com/html_tag/link/image/neko_s.jpg"
   },
   {
     "name": "Kuma",
     "age": 6,
-    "hobby": "sleeping"
+    "hobby": "sleeping",
+    "image": ""
   },
   {
     "name": "Usagi",
