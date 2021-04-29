@@ -26,7 +26,7 @@ ruby spread_csv.rb スプレッドシートのURL スプレッドシートのタ
 
 （Mysqlからデータを引っ張ってくる場合）
 ruby spread_csv.rb スプレッドシートのURL スプレッドシートのタブ名 dev（もしくはpro） 抽出したいデータのクエリ（必ず文字列で！）
-// ex: ruby spread_csv.rb https://docs.google.com/spreadsheets~~~~~~=0 sheet1 dev "select * from ~~~_development.users"
+// ex: ruby spread_csv.rb https://docs.google.com/spreadsheets~~~~~~=0 sheet1 dev "select * from development_db_name.users"
 ```
 
 ### コマンド実行後
