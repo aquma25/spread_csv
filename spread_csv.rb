@@ -1,4 +1,4 @@
-#Google Spreadsheetに処理を書き込んでいくスクリプト
+#Google Spreadsheetに処理を書き込んでいくMain処理
 
 require "google_drive"
 require_relative "recombined_data"
