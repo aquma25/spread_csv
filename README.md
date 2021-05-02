@@ -1,5 +1,6 @@
 ### 出来ること
 - users_data.json内の各ユーザデータをGoogleSpreadSheetに書き込んでいく
+- ローカルのMysqlのデータをGoogleSpreadSheetに書き込んでいく
 
 ### 参考資料
 - [OAuth ウェブ クライアント ID を作成する](https://support.google.com/workspacemigrate/answer/9222992?hl=ja)
@@ -25,8 +26,8 @@ ruby spread_csv.rb スプレッドシートのURL スプレッドシートのタ
 // ex: ruby spread_csv.rb https://docs.google.com/spreadsheets~~~~~~=0 sheet1
 
 （Mysqlからデータを引っ張ってくる場合）
-ruby spread_csv.rb スプレッドシートのURL スプレッドシートのタブ名 dev（もしくはpro） 抽出したいデータのクエリ（必ず文字列で！）
-// ex: ruby spread_csv.rb https://docs.google.com/spreadsheets~~~~~~=0 sheet1 dev "select * from development_db_name.users"
+ruby spread_csv.rb スプレッドシートのURL スプレッドシートのタブ名 dev（もしくはpro） DB名(スネークケースで) テーブル名(複数名で)
+// ex: ruby spread_csv.rb https://docs.google.com/spreadsheets~~~~~~=0 sheet1 dev development_db_name users
 ```
 
 ### コマンド実行後
