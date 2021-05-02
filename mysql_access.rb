@@ -4,8 +4,7 @@ require 'mysql2'
 
 class MysqlAccess
   
-  def initialize(work_sheet, env, db_name, table_name)
-    @work_sheet = work_sheet
+  def initialize(env, db_name, table_name)
     @client = case env
       when "dev"
         Mysql2::Client.new(host: "localhost", username: "root")
@@ -19,22 +18,7 @@ class MysqlAccess
 
   def run
     begin
-      queries = @client.query(@query)
-   
-      # Header
-      queries.first.each.with_index(1) do |(key, val), index|
-        @work_sheet[1, index] = key.to_s
-      end
-
-      # Rows
-      queries.each_with_index do |hash, num|
-        hash.each.each.with_index(1) do |(key, val), index|
-          @work_sheet[num + 2, index] = val.to_s
-        end
-        puts "#{num + 1}/#{queries.size}"
-      end
-
-      @work_sheet
+      @client.query(@query)
     rescue => error
       "Error: #{error.class}, Message: #{error.message}, BackTrace: #{error.backtrace}"
     end
