@@ -1,7 +1,8 @@
 #Google Spreadsheetに処理を書き込んでいくMain処理
 
 require "google_drive"
-require_relative "recombined_data"
+require "json"
+require_relative "create_header_rows"
 require_relative "mysql_access"
 
 puts "Process Start"
@@ -18,12 +19,14 @@ spread_sheet = session.spreadsheet_by_url(SPREAD_SHEET_PATH)
 work_sheet   = spread_sheet.worksheet_by_title(SHEET_TAB_NAME)
 
 #jsonからまたはmysqlからデータを取得
-wws = if SQL_ENV.nil?
-        RecombinedData.new(work_sheet).run
-      else
-        MysqlAccess.new(work_sheet, SQL_ENV, DB_NAME, TABLE_NAME).run
-      end
+datum = if SQL_ENV.nil?
+          File.open("user_data.json") { |file| JSON.load(file) }
+        else
+          MysqlAccess.new(SQL_ENV, DB_NAME, TABLE_NAME).run
+        end
 
-wws.save
+written_work_sheet = CreateHeaderRows.new(work_sheet, datum).run
+
+written_work_sheet.save
 
 puts "Process Finish"
