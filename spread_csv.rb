@@ -2,6 +2,8 @@
 
 require "google_drive"
 require "json"
+require 'benchmark'
+
 require_relative "create_header_rows"
 require_relative "mysql_access"
 
@@ -25,10 +27,13 @@ datum = if SQL_ENV.nil?
           MysqlAccess.new(SQL_ENV, DB_NAME, TABLE_NAME).run
         end
 
-#表の見出しと行を生成する
-written_work_sheet = CreateHeaderRows.new(work_sheet, datum).run
+result = Benchmark.realtime do
+  #表の見出しと行を生成する
+  written_work_sheet = CreateHeaderRows.new(work_sheet, datum).run
 
-#実際に書き込んでいく
-written_work_sheet.save
+  #実際に書き込んでいく
+  written_work_sheet.save
+end
 
 puts "Process Finish"
+puts "Processing Time: #{result} sec."
