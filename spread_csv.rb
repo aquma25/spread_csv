@@ -18,15 +18,17 @@ TABLE_NAME        = ARGV[4]
 spread_sheet = session.spreadsheet_by_url(SPREAD_SHEET_PATH)
 work_sheet   = spread_sheet.worksheet_by_title(SHEET_TAB_NAME)
 
-#jsonからまたはmysqlからデータを取得
+#jsonまたはmysqlからデータを取得
 datum = if SQL_ENV.nil?
           File.open("user_data.json") { |file| JSON.load(file) }
         else
           MysqlAccess.new(SQL_ENV, DB_NAME, TABLE_NAME).run
         end
 
+#表の見出しと行を生成する
 written_work_sheet = CreateHeaderRows.new(work_sheet, datum).run
 
+#実際に書き込んでいく
 written_work_sheet.save
 
 puts "Process Finish"
