@@ -1,4 +1,4 @@
-#MySQLのデータを抽出する
+#MySQLのデータを抽出する処理
 
 require 'mysql2'
 
